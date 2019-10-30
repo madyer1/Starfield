@@ -1,5 +1,5 @@
 //your code here
-Particle star[]= new Particle[100];
+Particle star[]= new Particle[300];
 float rot = 0;
 void setup()
 {
@@ -16,22 +16,27 @@ void draw()
 	stroke(255,255,255,50);
 	rect(0,0,1000,1000);
 	translate(500,500);
-	//rotate(rot);
+	star[0].move();
+	star[0].show();
+	rotate(rot);
 
-	for(int i=0;i<star.length;i++){
+	for(int i=1;i<star.length;i++){
 		star[i].move();
 		star[i].show();
 	}
-	//rot += .02;
+	rot += .02;
 
 }
 class Particle
 {
-	double myX,myY,myColor,myAngle, mySpeed, mySize;
+	double myX,myY,myAngle, mySpeed, mySize;
+	int myR,myG,myB;
 	Particle(){
 		myX= 0;
 		myY = 0;
-		myColor = 255;
+		myR = (int)(Math.random()*255)+1;
+		myG = (int)(Math.random()*255)+1;
+		myB = (int)(Math.random()*255)+1;
 		mySize = 2;
 		myAngle = (Math.random()*2)*Math.PI;
 		mySpeed = (Math.random()*8)+1;
@@ -50,7 +55,7 @@ class Particle
 
 	}
 	void show(){
-		fill(255);
+		fill(myR,myG,myB);
 		ellipse((float)myX,(float)myY,(float)mySize,(float)mySize);
 	}
 }
